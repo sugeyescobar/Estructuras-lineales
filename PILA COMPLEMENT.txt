@@ -1,0 +1,106 @@
+package pila2;
+import java.net.Socket;
+import java.time.temporal.Temporal;
+import java.util.Scanner;
+import java.util.Random;
+/**
+ *
+ * @author ESCOBAR
+ */
+public class Pila2 {
+    public static void main(String[] args) {
+       Scanner sc = new Scanner(System.in);
+       int cont=0,opt=0,temporal=0;
+       char letra='A';
+       char [] pila = new char[26];
+       char [] cpomp =new char[26];
+       int numc=0,c=0;
+       int [] mayor =new int [26];
+       do{
+        System.out.print("\n"
+                + " 1= agregar \n"
+                + "2= Eliminar\n"
+                + "3= Mostrar\n"
+                + "4= repetidos\n"
+                + "5= Salir\n");
+        switch (opt = sc.nextInt()) {
+            ///
+            case 1:
+                if(cont == pila.length){
+                    System.out.println("la pila esta llena....");
+                }else{
+                    if(cont<pila.length){
+                        char[] aleatorio={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+                        for(int i=cont;i<26;i++){
+                            pila[cont] = aleatorio[(int)(Math.random()*26)];
+                            cpomp[cont]=letra;
+                            cont++;
+                            letra++;
+                        }
+                    }
+                    
+                }
+            break;
+            // termina case1
+            case 2:
+            if(cont > 0){
+                System.out.println("el dato "+ cont  +" fue eliminado....");
+                cont--;
+            }else{
+                System.out.println("la pila esta vacia....");
+            }
+            break;
+            //termina case2
+            case 3:
+                if(cont >0){
+                    for (int i= cont-1; i>=0;i--){
+                        System.out.print(" " + pila[i]+ ",");
+                    }
+                }else{
+                    System.out.println("la pila esta vacia....");
+                }
+            break;
+            // termina case 3
+            case 4:
+                if(cont >0){
+                    for (int j= cont-1; j>=0;j--){
+                        for (int i= cont-1; i>=0;i--){
+                            if(pila[i]==cpomp[j]){
+                                numc++;
+                            }
+                        }
+                        mayor[c] = numc;
+                        c++;
+                        /*System.out.println("--"+mayor[j] + cpomp[j]);*/
+                        /*if(numc>0){
+                            System.out.println(cpomp[j] +" aparece " + numc);
+                            System.out.println();
+                        }*/
+                        numc=0;
+                    } 
+                    for (int j= 0; j<26;j++){
+                        for (int i=j+1; i<26-1;i++){
+                            if(mayor[j]>=mayor[i]){
+                                temporal=mayor[j];
+                                mayor[j]=mayor[i];
+                                mayor[i]=temporal;
+                            }
+                        }
+                    }
+                    for(int i=0;i<26;i++){
+                        System.out.print(" ");
+                    }
+                    System.out.println(cpomp[24] + " aparece:  "+ mayor[24] );
+                }else{
+                    System.out.println("la pila esta vacia....");
+                }
+            break;
+            //termina case4
+            default:
+                System.out.println("selecciona una opcion valida");
+            break;
+        }
+       }while(opt != 5);
+    }
+    
+}
